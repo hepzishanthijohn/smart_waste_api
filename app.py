@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List
 import datetime
+import uvicorn
 
 app = FastAPI()
 
@@ -79,3 +80,7 @@ def update_bin(bin_id: int, load_status: str, weight: float, gas_status: str, co
     bin = check_alerts(bin)
     
     return {"message": "Bin status updated", "bin": bin}
+
+# Add the following to start the FastAPI app using Uvicorn when the script is executed directly
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
